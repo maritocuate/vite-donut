@@ -48,11 +48,31 @@ Array(200).fill().forEach(addStar)
 const spaceTexture = new THREE.TextureLoader().load('space.jpg')
 scene.background = spaceTexture
 
+//  Scroll
+function moveCamera() {
+  const t = document.body.getBoundingClientRect().top;
+  /* moon.rotation.x += 0.05;
+  moon.rotation.y += 0.075;
+  moon.rotation.z += 0.05;
+
+  jeff.rotation.y += 0.01;
+  jeff.rotation.z += 0.01; */
+
+  camera.position.z = t * -0.01;
+  camera.position.x = t * -0.0002;
+  camera.rotation.y = t * -0.0002;
+}
+document.body.onscroll = moveCamera
+moveCamera()
+
+
 function animate() {
   requestAnimationFrame(animate)
   torus.rotation.x += 0.01
   torus.rotation.y += 0.001
   torus.rotation.z += 0.01
+
+  console.log(document.body.onscroll)
 
   controls.update()
   renderer.render(scene, camera)
